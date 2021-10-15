@@ -1,0 +1,169 @@
+// variables
+:root {
+  --primaryLight: #477ce7;
+  --primary: #1462ff;
+  --primaryLightest: #6eb9f7;
+  --primaryHoverG: #47a7f5 radial-gradient(circle, transparent 1%, #36a8eb 1%)
+    center/15000%;
+}
+/*styles
+body
+*/
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+// Everything
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+// ripple
+
+@mixin ripple-element() {
+  content: "";
+  width: 100%;
+  height: auto;
+  padding-bottom: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--primaryLight);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  visibility: hidden;
+}
+
+@mixin ripple-element-active() {
+  visibility: visible;
+}
+@keyframes scale-up {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+// button
+.take-step {
+  color: whitesmoke;
+  background-color: var(--primaryLight);
+  justify-content: space-around;
+  background-position: center;
+  transition: background 0.8s;
+  cursor: pointer;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 6px 30px -10px var(--primary);
+  cursor: pointer;
+  position: absolute;
+  bottom: 10rem;
+  &::before {
+    @include ripple-element();
+  }
+
+  .btn-ripple:not(:active)::before {
+    animation: scale-up 0.3s ease-out 0s;
+  }
+  &:focus::before {
+    @include ripple-element-active();
+  }
+  &::before {
+    width: 150%;
+    padding-bottom: 150%;
+    animation-duration: 0.3s;
+  }
+  &:hover {
+    background: var(--primaryHoverG);
+  }
+  &:active {
+    background-color: var(--primaryLightest);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}
+
+.loader {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid hsl(0, 1%, 75%);
+    border-radius: 50%;
+    border-top-color: black;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+h1 img {
+  width: 3rem;
+}
+
+
+
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  position: absolute;
+  bottom: 0;
+}
+.social-icons li {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.social-icons a {
+  background-color: #eceeef;
+  color: #818a91;
+  font-size: 1rem;
+  display: inline-block;
+  line-height: 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  text-align: center;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+  color: #fff;
+  background-color: #333;
+}
